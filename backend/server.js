@@ -11,6 +11,7 @@ const errorHandler = require('./middleware/errorHandler');
 const credentials = require('./middleware/credentials');
 const verifyJwt = require('./middleware/verifyJwt');
 const connectDB = require('./config/db');
+const projectRoutes = require("./routes/projectRoutes");
 
 const PORT = process.env.PORT || 3500;
 
@@ -32,6 +33,7 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
+app.use('/projects', projectRoutes);
 
 app.use(verifyJwt);
 
@@ -40,5 +42,5 @@ mongoose.connection.once('open', () => {
     app.listen(PORT, () => console.log(`Server running on the port ${PORT}`));
 });
 
-console.log(app);
+//console.log(app);
 
